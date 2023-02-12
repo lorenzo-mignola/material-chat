@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "pnpm --stream -r run dev",
     "start": "pnpm --stream -r run start",
+    "lint": "pnpm --stream -r run lint",
     "build:client": "pnpm --filter client build",
     "build:server": "pnpm --filter server build",
     "build": "pnpm build:server && pnpm build:client"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }
