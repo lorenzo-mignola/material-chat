@@ -1,5 +1,8 @@
+import fastifyStatic from '@fastify/static';
 import fastifyRequestLogger from '@mgcrea/fastify-request-logger';
 import createFastify, { FastifyInstance, FastifyServerOptions } from 'fastify';
+import socketioServer from 'fastify-socket.io';
+import path from 'path';
 
 const createServer = (options: FastifyServerOptions = {}): FastifyInstance => {
   const server = createFastify({
@@ -19,6 +22,16 @@ const createServer = (options: FastifyServerOptions = {}): FastifyInstance => {
   });
 
   server.register(fastifyRequestLogger);
+  server.get('/ping', async () => {
+    return 'pong\n';
+  });
+
+  server.register(fastifyStatic, {
+    root: path.join(__dirname, './public'),
+    prefix: '/',
+  });
+
+  server.register(socketioServer);
 
   return server;
 };
